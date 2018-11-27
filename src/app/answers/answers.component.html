@@ -1,0 +1,19 @@
+<div *ngIf="answers$">
+  <h1>Question </h1> 
+  <p>{{ questionTitle }}</p>
+  <h1>Answers</h1>
+  <p *ngIf="answers$ && answers$.items && answers$.items.length === 0">No Answer Found</p>
+
+  <ul [@listStagger]="answers$.items" *ngIf="answers$.items">
+    <li *ngFor="let answer of answers$.items">
+      <a href="javaScript:void(0);">Answer {{ answers$.items.indexOf(answer) + 1 }}</a>
+
+      <ul>
+        <li><span>Score:</span> {{ answer.score }}</li>
+        <li><span>Creation Date:</span> {{ answer.creation_date * 1000 | date:['hh:mm:ss dd a MMM, yyyy'] }}</li>
+        <li><span>Last Activity Date:</span> {{ answer.last_activity_date * 1000 | date:['hh:mm:ss dd a MMM, yyyy'] }}</li>
+        <li><span>Accepted:</span> {{ answer.is_accepted ? 'YES' : 'NO' }}</li>
+      </ul>
+    </li>
+  </ul>
+</div>
